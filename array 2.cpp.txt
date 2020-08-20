@@ -1,0 +1,29 @@
+//find no in array and print its position
+
+#include <iostream>
+using namespace std;
+int main() 
+{
+    int arr[10];
+    int n,i;
+    cin>>n;
+    for(int i=0;i<10;i++)
+    {
+        cin>>arr[i];
+    }
+    for(i=0;i<10;i++)
+    {
+        if(arr[i]==n)
+        {
+            cout<<"True"<<endl;
+            cout<<i+1<<endl;   //print the position
+            break;
+        }
+        
+    }
+    if(i==10)
+    {
+        cout<<"False"<<endl;
+    }
+    return 0;
+}
