@@ -1,0 +1,21 @@
+//find unique no using xor
+
+
+
+#include <iostream>
+using namespace std;
+int main() {
+   int n,totalxor,no;
+   cin>>n;
+   int firstnum;
+   cin>>firstnum;
+   totalxor=firstnum;
+   for(int i=1;i<=n-1;i++)
+   {
+     cin>>no;
+     totalxor=totalxor^no;
+   }
+   cout<<totalxor<<endl;
+}
+
+//or take totalxor=0, i<=n

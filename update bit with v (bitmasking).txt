@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+int clear_bit(int n, int i)
+{
+    //clear ith bit from right
+    //mask --> ith place has 0 bit and all other bits are retained
+    int mask = ~(1 << i);  
+    int ans = n & mask;
+    return ans;
+}
+int main() 
+{
+    //update ith bit from right
+    //set v (0 or 1) at ith position from right
+
+    /*step 1- clear ith bit (make it 0)
+    step 2 - mask = (v << i)
+    step 3 - n | mask
+    */
+    int n,i,v;
+    cin>>n>>i>>v;
+
+    int n_ = clear_bit(n, i);
+    int mask = (v << i);
+    int ans = n | mask;
+    cout<<ans<<endl;
+}

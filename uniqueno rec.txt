@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+int uniqueElement(int *arr,int start,int end)
+{
+
+    if(start==end)
+    {
+        return start;  //start = end = mid
+    }
+    int mid=start+((end-start)/2);    
+    if(mid%2==0)
+    {
+        if(arr[mid+1]==arr[mid])
+        return uniqueElement(arr,mid+2,end); //right    (mid or mid+1 unique nhi hai  islie start=mid+1)
+        else
+        return uniqueElement(arr,start,mid+1);   //left   (mid bhi unique ho sakta hai islie end=mid+1)
+    }
+    else
+    {
+        if(arr[mid+1]==arr[mid])
+        return uniqueElement(arr,start,mid-1);  //left    (mid unique nhi hai islie end=mid-1)
+        else
+        return uniqueElement(arr,mid,end);     //right    (mid bhi unique ho sakta hai islie start=mid)
+    }
+
+     
+    //return -1;   
+}
+int main()
+{
+    int arr[13]={1,1,2,2,3,4,4,5,5,6,6,9,9};
+    int n=13;
+    int result= uniqueElement(arr,0,n-1);
+    cout<<result<<endl;
+    return 0;
+}

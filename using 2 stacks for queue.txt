@@ -1,0 +1,61 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class Queue{
+    stack<int> s1,s2;
+public:
+    void push(int data){   //same as pushing in a stack      O(1)
+        s1.push(data);
+    }    
+    void pop(){   //    O(N)
+        //we need to first shift the elements from s1 to s2
+        while(!s1.empty()){
+            int x = s1.top();
+            s2.push(x);
+            s1.pop();
+        }
+
+        //now we need to pop from s2
+        s2.pop();
+
+        //transfer the elements back from s2 to s1
+        while(!s2.empty()){
+            int x = s2.top();
+            s1.push(x);
+            s2.pop();
+        }        
+    }
+    int front_ele(){    //O(N)
+        //we need to first shift the elements from s1 to s2
+        while(!s1.empty()){
+            int x = s1.top();
+            s2.push(x);
+            s1.pop();
+        }
+
+        //now we need to pop from s2
+        int front_element = s2.top();
+
+        //transfer the elements back from s2 to s1
+        while(!s2.empty()){
+            int x = s2.top();
+            s1.push(x);
+            s2.pop();
+        }  
+        return front_element;       
+    }
+    bool isEmpty(){
+        return s1.empty();
+    }
+};
+int main() {
+    Queue q;
+    int n;
+    cin >> n;
+
+    while(!q.isEmpty()){
+        cout << q.front_ele() << "<--";
+        q.pop();
+    }        
+}

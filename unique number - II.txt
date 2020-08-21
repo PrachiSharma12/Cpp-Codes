@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int n,no;
+    int a[100000];
+    cin>>n;     
+    int result = 0;
+    for(int i = 0; i < n; i++)
+    {
+        cin>>no;
+        a[i] = no;
+        result = result^no;
+    }
+
+    //find the position of the first set bit in result
+    int temp = result;
+    int pos = 0;
+    while((temp&1) == 0)
+    {
+        pos++;
+        temp = temp>>1;
+    }
+
+    //to check how m any numbers contain set at position 'pos', create a mask
+    //mask = 1 << pos  and then number & mask
+    // if (number & mask > 0) --> it has set bit at position 'pos'
+
+    int mask = (1 << pos);
+    int x = 0; //unique no 1
+    int y = 0; //unique no 2
+    //numbers that contain set at position 'pos', create a mask
+    for(int i = 0;i < n; i++)
+    {
+        if((a[i] & mask) > 0)
+        {
+            x = x^a[i];
+        }
+    }
+    y = result^x;
+
+    cout<<min(x,y)<<" "<<max(x,y);     
+}
