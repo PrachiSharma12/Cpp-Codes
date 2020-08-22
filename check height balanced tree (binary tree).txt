@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* left;
+        node* right;
+    //Constructor
+    node(int d){
+        data = d;
+        left = NULL;
+        right = NULL;
+    }   
+};
+node* bulidTree(){
+    int d;
+    cin >> d;
+    //base case
+    if(d == -1){
+        return NULL;
+    }
+    //otherwise
+    node* root = new node(d);
+    root->left = bulidTree();  //left subtree
+    root->right = bulidTree(); //right subtree
+
+    return root;
+}
+class HBPair{    //or insted of using pair, we can use only one variable height and if height = -1, it is not balanced
+    public:
+        int height;
+        bool balanced;
+};
+HBPair isHeightBalanced(node* root){
+    HBPair p; 
+    if(root == NULL){
+        p.height = 0;
+        p.balanced = true;  // a null tree is always a height balanced tree
+        return p;
+    }
+    //recursive part
+    HBPair left = isHeightBalanced(root->left);
+    HBPair right = isHeightBalanced(root->right);
+
+    p.height = max(left.height,right.height) + 1;
+
+    if(abs(left.height - right.height) <= 1 && left.balanced && right.balanced){
+        p.balanced = true;
+    }
+    else{
+        p.balanced = false;
+    }
+    return p;
+
+}
+int main() {
+    node* root = bulidTree();
+    HBPair ans = isHeightBalanced(root);
+    if(ans.balanced){
+        cout << "Balanced";
+    }
+    else{
+        cout << "Not Balanced";
+    }
+}

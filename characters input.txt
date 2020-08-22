@@ -1,0 +1,20 @@
+//characters input
+
+#include <iostream>
+using namespace std;
+int main() 
+{
+    char ch;
+    cin>>ch;
+    while(ch != '0')
+    {
+        cout<<ch;
+        //cin>>ch;  // does not read space so output of hello world will be helloworld
+        //for reading spaces....use cin.get() instead of cin
+        cin.get(ch); //character by character
+        
+    }
+    
+    return 0;
+}
+
