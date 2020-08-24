@@ -1,0 +1,17 @@
+// odd numbers
+
+#include <iostream>
+using namespace std;
+int main() {
+   int n,a=0;
+   cin>>n;
+   while(a<=n)
+   {
+       if(a%2!=0)
+       {
+           cout<<a<<endl;
+       }
+       a=a+1;
+   }
+
+}

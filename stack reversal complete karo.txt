@@ -1,0 +1,48 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+void stackReversal(stack<int> &a)
+{
+    stack<int> b;
+    stack<int> c;
+    //Transfer from a to b
+    while(!a.empty())
+    {
+        b.push(a.top());
+        a.pop();
+    }
+
+    //Transfer from b to c
+    while(!b.empty())
+    {
+        c.push(b.top());
+        b.pop();
+    }
+
+    //Transfer from c to a
+    while(!c.empty())
+    {
+        a.push(c.top());
+        c.pop();
+    }    
+
+}
+int main() {
+    stack<int> a;
+    a.push(1);
+    a.push(2);
+    a.push(3);
+    a.push(4);
+    a.push(5);
+    stackReversal(a);
+    cout<<a.top()<<endl;
+    a.pop();
+    cout<<a.top()<<endl;
+    a.pop();
+    cout<<a.top()<<endl;
+    a.pop();
+    cout<<a.top()<<endl;
+    a.pop();
+    cout<<a.top()<<endl;
+}
+
