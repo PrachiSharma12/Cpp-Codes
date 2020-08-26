@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+class Complex
+{
+public:    
+    int real;
+    int imaginary;
+
+    //copy constructor
+    //Complex(Complex &X)
+    //{
+    //   cout<<"My copy constructor";
+    //  real = 
+    //}
+
+    //copy constructor
+    Complex(Complex &X)
+    {
+        cout<<"My copy constructor";
+        real = X.real;
+        imaginary = X.imaginary;
+    }
+    void operator + (Complex &X)
+    { 
+        cout<<"my operator +"<<endl;
+        real += X.real;
+        imaginary += X.imaginary;
+    }
+    void operator - (Complex &X)
+    { 
+        cout<<"my operator -"<<endl;
+        real -= X.real;
+        imaginary -= X.imaginary;
+    }  
+
+    void print()
+    {
+        cout<<real<<" + "<<imaginary<<"i"<<endl;
+    }
+};
+int main() 
+{
+    Complex n;
+    n.real=5;
+    n.imaginary=7;
+    n.print();
+    // Complex m;
+    Complex m(n);
+   // m.real=3;
+   // m.imaginary=2;
+   // m.print();
+    n + m;
+    n.print();
+    n - m;
+    n.print();
+
+
+}

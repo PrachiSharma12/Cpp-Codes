@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+void wow(int startrow,int startcol, int endrow, int endcol, string output)
+{
+    if(startrow==endrow && startcol==endcol)
+    {
+        cout<<output<<endl;
+        return;
+    }
+    if(startrow>endrow || startcol>endcol)
+        return;
+   
+    //hotizontal
+    wow(startrow,startcol+1,endrow,endcol,output+"H");
+    //vertical
+    wow(startrow+1,startcol,endrow,endcol,output+"V");
+}
+int main() {
+    int row = 2,column = 2;
+    wow(0,0,row,column,"");
+    
+    
+}
