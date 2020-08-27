@@ -1,0 +1,23 @@
+//factorial using fucntions
+
+
+#include <iostream>
+using namespace std;
+int fact(int m)
+{
+    int k=1;
+    for(int i=1;i<=m;i++)
+    {
+        k=k*i;
+    }
+    return k;
+}
+
+int main() 
+{
+    int n;
+    cin>>n;
+    int a,b,c;
+    a=fact(n);
+    cout<<a<<endl;
+}

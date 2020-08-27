@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int main() 
+{
+    int n;
+    cin>>n;
+    int l,h,count=0;
+    for(l = 1; l*l <= n; l++)
+    {
+        for(h=l; h*l <= n; h++)
+        {
+            cout<<l<<","<<h<<endl;
+            count++;
+        }
+    }    
+    cout<<"Number of Distinct Rectangles= "<<count<<endl;
+}
