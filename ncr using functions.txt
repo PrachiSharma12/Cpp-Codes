@@ -1,0 +1,27 @@
+// ncr using functions
+
+
+#include <iostream>
+using namespace std;
+int fact(int m)
+{
+    int k=1;
+    for(int i=1;i<=m;i++)
+    {
+        k=k*i;
+    }
+    return k;
+}
+
+int main() 
+{
+    int n,r;
+    cin>>n>>r;
+    int a,b,c,ncr;
+    a=fact(n);
+    b=fact(r);
+    c=fact(n-r);
+    ncr= a/(b*c);
+    cout<<ncr<<endl;
+    
+}

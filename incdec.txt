@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+void incdec(int n, int i)
+{
+    if(i>n)
+    {
+        return;
+    }
+    cout << i <<" ";
+    incdec(n,i+1);
+    cout<< i <<" ";
+    
+}
+int main() 
+{
+    int n;
+    cin>>n;
+    incdec(n,1);    
+    return 0;
+}

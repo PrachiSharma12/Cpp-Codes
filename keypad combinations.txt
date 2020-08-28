@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+string keypad[]= {"+","abc","def","ghi","jkl","mno","pqrs","tuv","wx","yz"};
+void keypadcombinations(string input, string output)
+{
+    if(input.length()==0)
+    {
+        cout<<output<<endl;
+        return;
+    }
+    int ch = input[0]-'0';
+    string str = keypad[ch];
+    string ros = input.substr(1);
+
+    for(int i=0; i < str.length(); i++)
+    {
+        char include = str[i];
+        keypadcombinations(ros,output+include);
+    }
+}
+int main() 
+{
+    string str;
+    cin>>str;
+    keypadcombinations(str,"");
+}
