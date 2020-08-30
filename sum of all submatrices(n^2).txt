@@ -1,0 +1,27 @@
+//sum of all submatrices
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int arr[10][10],contri,sum = 0;
+    int r,c;
+    cin>>r>>c;
+    for(int i=0; i<r; i++)
+    {
+        for(int j=0; j<c; j++)
+        {
+            cin>>arr[i][j];
+        }
+    }    
+     //contribution of each cell
+     for(int i=0; i<r; i++)
+     {
+         for(int j=0; j<c; j++)
+         {
+             contri = ((i+1)*(j+1))*((r-i)*(c-j))*arr[i][j];
+             sum=sum+contri;
+         }
+     }
+     cout<<sum;
+}
