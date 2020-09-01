@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+bool isSafe(int board[10][10],int i, int j,int n)
+{
+    int r=i,c=j;
+
+    //left diagonal check
+    while(r>=0 && c>=0)
+    {
+        if(board[r][c]==1)
+            return false;
+        r--;
+        c--;    
+    } 
+
+    //right diagonal check
+    r=i,c=j;
+    while(r>=0 && c < n)
+    {
+        if(board[r][c]==1)
+            return false;
+        r--;
+        c++;    
+    }  
+
+    //column check
+    r=i,c=j;
+    while(r>=0)
+    {
+        if(board[r][c]==1)
+            return false;
+        r--;    
+    } 
+    return true;
+}
+bool nQueens(int board[10][10], int row, int n)
+{
+    if(row==n)
+    {
+        //print board
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                cout<<board[i][j]<<", ";
+            }
+            cout<<endl;
+        }
+        return true;
+    }
+    for(int col=0; col<n; col++)
+    {
+        if(isSafe(board,row,col,n))
+        {
+            board[row][col]=1;
+            bool queenPlaced= nQueens(board,row+1,n);
+            if(queenPlaced==true)
+                return true;
+        }
+            //backtrack
+            board[row][col]=0;    
+    }
+        return false;
+}
+int main() {
+    int board[10][10]={0};
+    int n=4;
+    nQueens(board,0,n);
+
+}
+
+

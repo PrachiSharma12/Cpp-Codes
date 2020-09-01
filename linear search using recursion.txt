@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+bool search(int *arr,int n, int key)
+{
+        if(n==0)
+        {
+            return false;
+        }
+        search(arr+1, n-1, key); //recursive call
+        if(arr[0] == key || search(arr+1, n-1, key))
+            return true;
+        else
+            return false;
+    
+}
+
+int main() 
+{
+    int arr[10]={11,1,2,5,10};
+    int key, n = 5;
+    cin>>key;
+    if(search(arr,n,key))
+        cout<<"Key Found";
+    else
+        cout<<"Key Not Found";  
+
+}

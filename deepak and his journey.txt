@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+int minPrice(int* c,int* l, int n)
+{
+    long long int minimumPrice=c[0];
+    long long int totalMoneySpent= (minimumPrice * l[0]);
+
+    for(int i=1; i<n; i++)
+    {
+        if(c[i]<minimumPrice)
+        {
+            minimumPrice=c[i];
+        }
+            totalMoneySpent += (l[i] * minimumPrice);
+    
+    }
+    return totalMoneySpent;
+
+
+
+}
+int main() 
+{
+    int t;
+    cin>>t;
+    for(int i=0; i < t ; i++)
+    {
+        int n;    //no of checkpoints
+        cin>>n;
+
+        //array for cost per l
+        int c[100];
+        for(int i=0; i<n; i++)
+        {
+            cin>>c[i];
+        }
+
+        //amount of petrol required to reach the next checkpoint
+        int l[100];
+        for(int i=0; i<n; i++)
+        {
+            cin>>l[i];
+        }
+        cout<<minPrice(c,l,n)<<endl;
+          
+    }
+}
