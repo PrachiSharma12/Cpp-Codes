@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+char keypad[10][10] = {" ", ".+@$", "abc", "def", "ghi", "jkl" , "mno", "pqrs" , "tuv", "wxyz"};  //this implies 0 is mapped with null, 1 is mapped with null, 2 is mapped with 'A','B','C' and so on.....
+
+void generate_subseuences_keypad(char* input, char* output, int i, int j) // i--> input ptr, j --> output ptr
+{
+    //base case
+    if(input[i] == '\0')
+    {
+        output[j] = '\0';
+        cout << output <<endl;
+        return;
+    }
+    int digit = input[i] - '0';  //converting it into integer
+    
+    if(digit == 0)
+    {
+        generate_subseuences_keypad(input, output, i+1,j);
+    }          
+    for(int k = 0; keypad[digit][k] != '\0'; k++)  //condition --> array element should not be null
+    {
+        output[j] = keypad[digit][k];
+
+        //rec call to fill the remaining part
+        generate_subseuences_keypad(input,output,i+1,j+1);
+    }
+    return;
+}
+int main() {
+    char input[100];
+    cin >> input;  // take number in character format
+    char output[100];
+    
+    generate_subseuences_keypad(input, output, 0 ,0);
+}
