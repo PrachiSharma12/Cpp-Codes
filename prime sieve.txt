@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void prime_sieve(int *p)
+{
+    //skip even numbers because every even no except 2 in non prime
+    //initially mark all the odd nos as prime
+    for(int i = 3; i < 1000000; i = i + 2)
+    {
+        p[i] = 1;
+    }
+    //sieve
+    for(long long int i = 3; i < 1000000; i = i+2)
+    {
+        //if the current no is not marked (it is prime) --> mark all it's multiples as non prime
+        if(p[i] == 1)
+        {
+            for(long long int j= i*i; j < 1000000; j = j+i)
+            {
+                p[j] = 0;
+            }
+        }
+    }
+    //speical cases
+    p[2] = 1;
+    p[0] = p[1] = 0;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    int p[1000000] = {0};
+    // a no is prime if p[no] = 1 and non prime if p[no] = 0
+    prime_sieve(p);
+
+    //print prime numbers till n
+    for(int i = 0; i < n ; i++)
+    {
+        if(p[i] == 1)
+            cout<<i<<" ";
+    }
+}

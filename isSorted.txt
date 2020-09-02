@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+bool wow(int *arr,int n)
+{
+    if(n==1)
+    {
+        return true;   //agar ek hi element hai wo khud mein sorted hi hota hai
+    }
+    if(arr[0]<=arr[1] && wow(arr+1,n-1))
+    {
+        return true;
+    }
+    return false;
+    
+}
+int main() 
+{
+    int arr[10];
+    int n;
+    cin>>n;
+    for(int i=0; i<n; i++)
+    {
+        cin>>arr[i];
+    }
+    if(wow(arr,n))
+        cout<<"sorted";
+    else
+        cout<<"not sorted";       
+}

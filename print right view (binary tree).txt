@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* left;
+        node* right;
+    //Constructor
+    node(int d){
+        data = d;
+        left = NULL;
+        right = NULL;
+    }   
+};
+node* bulidTree(){
+    int d;
+    cin >> d;
+    //base case
+    if(d == -1){
+        return NULL;
+    }
+    //otherwise
+    node* root = new node(d);
+    root->left = bulidTree();  //left subtree
+    root->right = bulidTree(); //right subtree
+
+    return root;
+}
+void printRightView(node* root, int level, int &maxlevel){
+    if(root == NULL){
+        return;
+    }
+    //root
+    if(level > maxlevel){
+        //have discovered a new level
+        cout << root->data <<" ";
+        maxlevel = level;
+    }
+    //right
+    printRightView(root -> right, level + 1, maxlevel);
+    //left
+    printRightView(root -> left, level + 1, maxlevel);
+}
+
+int main() {
+    node* root = bulidTree();
+    int maxlevel = -1;
+    printRightView(root,0,maxlevel);
+}

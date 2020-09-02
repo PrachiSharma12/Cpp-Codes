@@ -1,0 +1,25 @@
+//subsequences
+
+#include <iostream>
+using namespace std;
+void wow(string input, string output)
+{
+    if(input.length()==0)
+    {
+        cout<<output<<" , ";
+        return;
+    }
+    char ch=input[0];
+    string ros= input.substr(1);
+    wow(ros,output);   //excluding 1st character
+    wow(ros,output+ch);   //including 1st character
+
+
+}
+int main() 
+{
+    string str;
+    cin>>str;
+    //int n= str.length();
+    wow(str,"");
+}
