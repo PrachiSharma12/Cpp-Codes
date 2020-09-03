@@ -1,0 +1,217 @@
+Submission #6459445
+#include <iostream>
+using namespace std;
+void merge(int* arr, int start, int end)
+{
+    int mid = (start + end)/2;
+    //2 ptr approach
+    int i = start;
+    int j = mid+1;
+    int k = start;
+
+    int temp[1000000];
+    while(i <= mid && j <= end)
+    {
+        if(arr[i] < arr[j])
+        {
+            temp[k++] = arr[i++];
+        }
+        else
+        {
+            temp[k++] = arr[j++];
+        }
+    }
+    //if one array is finished and other is left...we need to copy all the elements as it is
+    while(i <= mid)
+    {
+        temp[k++] = arr[i++];
+    }
+    while(j <= end)
+    {
+        temp[k++] = arr[j++];
+    }    
+
+    //copy temp array to the original array
+    for(int i = start; i <= end; i++)
+        arr[i] = temp[i];
+}
+void merge_sort(int* arr, int start, int end)
+{
+    //base case --> 1 or 0 elements are sorted 
+    if( start >= end)
+        return;
+
+    //Follow 3 steps
+    //1. Divide the array
+    int mid = (start + end)/2;
+
+    //2. Recursively sort the two arrays --> start to mid and mid + 1 to end
+    merge_sort(arr,start,mid);
+    merge_sort(arr,mid+1,end);
+
+    //3. Merge the sorted arrays
+    merge(arr,start, end);
+
+}
+int main() {
+    int arr[1000000],n;
+    cin >> n;
+    for(int i = 0; i < n; i++)
+        cin >> arr[i];
+    merge_sort(arr,0,n-1);
+    for(int i = 0; i < n; i++)
+        cout << arr[i] <<" ";        
+}
+💡 MERGESORT
+
+Search Content
+Search Icon
+Course Progress
+
+27%
+Exit Class
+Course Content 
+Welcome!
+2 of 2 contents completed
+Basics of Problem Solving
+10 of 12 contents completed
+Getting started with C++
+9 of 9 contents completed
+Programming Fundamentals - I
+9 of 10 contents completed
+Programming Fundamentals - II
+2 of 13 contents completed
+🚀 Challenges - Fundamentals
+14 of 17 contents completed
+🚀 Challenges - Patterns
+13 of 15 contents completed
+Functions
+0 of 8 contents completed
+Arrays
+14 of 14 contents completed
+2D Arrays
+0 of 8 contents completed
+Character Arrays
+0 of 5 contents completed
+Strings
+0 of 5 contents completed
+2D Array Problems
+0 of 8 contents completed
+🚀 Challenges - Arrays
+12 of 18 contents completed
+🚀 Challenges - Strings
+11 of 13 contents completed
+Pointers
+2 of 9 contents completed
+Dynamic Memory Allocation
+0 of 6 contents completed
+Algorithms STL
+0 of 11 contents completed
+Divide & Conquer (Searching Problems)
+8 of 11 contents completed
+🚀 Challenges - Sorting & Searching
+15 of 19 contents completed
+Bit Manipulation
+13 of 15 contents completed
+🚀 Challenges - Bitmasking
+6 of 8 contents completed
+Number Theory Basics
+4 of 5 contents completed
+🚀 Challenges - Number Theory
+7 of 9 contents completed
+Recursion and Backtracking
+15 of 20 contents completed
+More Sorting Techniques & Problems
+1 of 9 contents completed
+🚀 Challenges - Recursion
+10 of 26 contents completed
+🚀 Challenges - Backtracking
+1 of 8 contents completed
+Space Time Complexity Analysis
+1 of 13 contents completed
+Object Oriented Programming Concepts
+7 of 19 contents completed
+Generic Programming in C++
+0 of 5 contents completed
+Vectors
+0 of 7 contents completed
+Linked Lists
+4 of 23 contents completed
+🚀 Challenges - Linked Lists
+0 of 13 contents completed
+Stacks
+1 of 10 contents completed
+Queues
+0 of 13 contents completed
+Deque
+0 of 3 contents completed
+🚀 Challenges - Stacks,Queue,Deque
+3 of 12 contents completed
+Binary Tree
+0 of 27 contents completed
+Binary Search Tree
+0 of 12 contents completed
+🚀 Challenges - Trees
+0 of 17 contents completed
+Heaps
+2 of 22 contents completed
+🚀 Challenges - Heaps
+1 of 5 contents completed
+Hashing/ Hashtable
+0 of 15 contents completed
+Hashing Problems
+0 of 14 contents completed
+Tries & Problem Solving
+0 of 11 contents completed
+🚀 Challenges - Hashing & Tries
+0 of 20 contents completed
+Greedy Algorithms
+0 of 19 contents completed
+🚀 Challenges - Greedy Algorithms
+0 of 8 contents completed
+Graph Algorithms
+0 of 27 contents completed
+🚀 Challenges - Graphs
+0 of 7 contents completed
+Dynamic Programming
+0 of 31 contents completed
+🚀 Challenges - Dynamic Programming
+0 of 29 contents completed
+String Matching Algorithms [Optional]
+0 of 6 contents completed
+Network Flow [Optional]
+0 of 7 contents completed
+Real Life Project - Sudoku (JS)
+0 of 4 contents completed
+Real Life Example - Splitwise Algorithm Design
+0 of 4 contents completed
+Recent Webinars [Optional]
+0 of 9 contents completed
+C++ E-Book / Notes
+1 of 2 contents completed
+Try Fullscreen mode  Beta
+Problem
+Submissions
+Leaderboard
+Solution
+Result	Score	Time	Language	Test Cases
+ Accepted View	100/100	--	cpp	Passed: 0 | Failed: 0
+ Wrong Answer View	0/100	--	cpp	Passed: 0 | Failed: 0
+Code Editor
+Choose Language 
+C++
+
+ Provide Custom Input
+Compile and Test Submit Code
+Get 24*7 Doubts & Mentor Support
+Have any queries? Ask a Doubt
+Ask Doubt
+Doubts
+Notes
+Filter Doubts
+My Doubts
+Resolved Doubts
+Unresolved Doubts
+
+No Doubts
+Doubts that you ask appear here

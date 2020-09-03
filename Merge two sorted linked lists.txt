@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* next;
+
+    //constructor
+    node(int data){
+        this->data = data;
+        this->next = NULL;
+    }    
+};
+void insertAtTail(node* &head,int data)
+{
+    node* n = new node(data);
+	if (head==NULL){
+		head = n;
+		return;
+	}
+
+	node* temp = head;
+	while(temp->next != NULL) {
+	    temp = temp->next;
+	}
+	temp->next = n;
+}
+node* merge(node* a, node* b)
+{
+    if(a == NULL){
+        return b;
+    }
+    else if(b == NULL){
+        return a;
+    }
+    node* c;
+    //Compare a and b for smaller element
+    if(a->data < b->data){
+        c = a;
+        c->next = merge(a->next, b);
+    }  
+    else{
+        c = b;
+        c->next = merge(a, b->next);        
+    }  
+    return c;
+}
+void print(node* head)
+{
+    node* temp = head;
+    while(temp != NULL)
+    {
+        cout<<temp->data<<" ";
+        temp = temp->next;
+    }
+    cout<<endl;
+}
+int main() {
+    long int testcases;
+    cin >> testcases;
+    for(int t=0; t < testcases; t++)
+    {
+        node* head1 = NULL;
+        node* head2 = NULL;
+        long long int n1,n2;
+        cin>>n1;
+        while(n1--){
+            int no;
+            cin>>no;
+            insertAtTail(head1,no);
+        }
+        cin>>n2;
+        while(n2--){
+            int no;
+            cin>>no;
+            insertAtTail(head2,no);
+        }  
+        node* head3 = merge(head1,head2);
+
+        print(head3);      
+
+    }
+    
+}
