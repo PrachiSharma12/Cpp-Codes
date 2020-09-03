@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+int MaxSubArray1(int* arr, int n)
+{
+    int maxSum = 0, currentSum = 0,left,right;
+    for(int i=0; i<n; i++)
+    {
+        for(int j=i; j<n; j++)
+        {
+            currentSum = 0;
+            for(int k=i; k<j; k++)
+            {
+                currentSum += arr[k];
+            }
+            if(currentSum > maxSum)
+            {
+                maxSum = currentSum;
+                left = i; 
+                right = j;
+            }
+        }
+    }
+    for(int q=left; q < right; q++)
+    {
+        cout<<arr[q]<<",";
+    }
+    return maxSum;
+
+}
+int main() {
+    int arr[1000],n;
+    cin>>n;
+    for(int b=0; b<n; b++)
+    {
+        cin>>arr[b];
+    }
+    int ans = MaxSubArray1(arr,n);
+    cout<<endl<<"MaxSum = "<<ans;
+}

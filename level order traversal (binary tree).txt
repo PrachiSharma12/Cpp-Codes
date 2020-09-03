@@ -1,0 +1,100 @@
+#include <iostream>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* left;
+        node* right;
+    //Constructor
+    node(int d){
+        data = d;
+        left = NULL;
+        right = NULL;
+    }   
+};
+node* bulidTree(){
+    int d;
+    cin >> d;
+    //base case
+    if(d == -1){
+        return NULL;
+    }
+    //otherwise
+    node* root = new node(d);
+    root->left = bulidTree();  //left subtree
+    root->right = bulidTree(); //right subtree
+
+    return root;
+}
+void print_Preorder(node* root){
+    if(root == NULL){
+        return;
+    }
+    //Otherwise, print the root first followed by the subtrees(children)
+    cout << root->data << " ";
+    //recursivey print the left subtree
+    print_Preorder(root->left);
+    //recursivey print the right subtree
+    print_Preorder(root->right);
+
+}
+void print_Inorder(node* root){
+    if(root == NULL){
+        return;
+    }
+    print_Inorder(root->left);
+    cout << root->data << " ";
+    print_Inorder(root->right);
+
+}
+void print_Postorder(node* root){
+    if(root == NULL){
+        return;
+    }
+    print_Postorder(root->left);
+    print_Postorder(root->right);
+    cout << root->data << " ";
+}
+
+int height(node* root){
+    if(root == NULL){
+        return 0;
+    }
+    int ls = height(root->left);
+    int rs = height(root->right);
+    return max(ls,rs)+1;
+}
+
+void printKthLevel(node* root, int k){
+    if(root == NULL){
+        return;
+    }
+    if(k==1){ //you are at the right node
+        cout << root->data<<" ";
+        return;
+    }
+    printKthLevel(root->left,k-1);
+    printKthLevel(root->right,k-1);
+    return;
+}
+
+void printAllLevels(node* root){
+    int H = height(root);
+    for(int i = 1; i <= H; i++){
+        printKthLevel(root,i);
+        cout << endl;
+    }
+    return;
+}
+
+int main() {
+    node* root = bulidTree();
+    print_Preorder(root);
+    cout<<endl;
+    print_Inorder(root);
+    cout<<endl;
+    print_Postorder(root);
+    cout << endl;
+    printAllLevels(root);
+}

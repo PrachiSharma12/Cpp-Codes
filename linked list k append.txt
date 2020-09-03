@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* next;
+
+    //constructor
+    node(int data){
+        this->data = data;
+        this->next = NULL;
+    }    
+};
+void insertAtTail(node* &head,int data)
+{
+    node* n = new node(data);
+	if (head==NULL){
+		head = n;
+		return;
+	}
+
+	node* temp = head;
+	while(temp->next != NULL) {
+	    temp = temp->next;
+	}
+	temp->next = n;
+}
+void print(node* head)
+{
+    node* temp = head;
+    while(temp != NULL)
+    {
+        cout<<temp->data<<" ";
+        temp = temp->next;
+    }
+    cout<<endl;
+}
+node* kAppend(node* &head,long long int k,long long int n)
+{
+    if(k>=n){
+        return head;
+    }
+    //we need (n-k)th node from the beginning
+    //Using runner technique
+    node* fast = head;
+    node* slow = head;
+    //1. Move fast ptr k steps ahead
+    for(int i = 0; i < k && fast->next!=NULL; i++){
+        fast = fast->next;
+    }
+    //2. Move slow and fast simpultaneously 1 step till the end
+    while(fast != NULL && fast-> next != NULL){
+        fast = fast->next;
+        slow = slow->next;
+    }
+    //Now slow is the (n-k)th node from the beginning
+
+    //we also first need to find the tail 
+    node* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    //now temp is the tail, point the next of the tail to the previous head
+    temp->next = head;
+    head = slow->next;
+    slow->next = NULL;
+
+    return head;
+
+}
+int main() {
+    node* head = NULL;
+    long long int n,k;
+    cin>>n;
+    for(int i = 0; i < n; i++){
+        int no;
+        cin>>no;
+        insertAtTail(head,no);
+    }
+    cin>>k;
+    k = k%n; //to handle the case k>n
+    kAppend(head,k,n);
+    print(head);    
+}
