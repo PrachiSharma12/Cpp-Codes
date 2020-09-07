@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int arr[26] = {0};
+    int flag = 1; //assume it is a pangram
+    string str;
+    getline(cin, str); //in order to read the spaces too
+
+    //arr[str[0] - 65]++;  //1st letter will be captial
+    for(int i = 0; i < str.length(); i++){
+        if(str[i] - 97 >= 0 && str[i] - 97 < 26 ){
+                arr[str[i] - 97]++;
+        }
+        else if(str[i] - 65 >= 0 && str[i] - 65 < 26){
+            arr[str[i] - 65]++;
+        }
+    }
+
+    //check the frequency array
+    for(int i = 0; i < 26; i++){
+        if(arr[i] == 0){
+            flag = 0;
+            break;
+        }
+    }
+    if(flag == 1){
+        cout << "pangram" <<endl;
+    }
+    else{
+        cout << "not pangram" <<endl;
+    }
+}
