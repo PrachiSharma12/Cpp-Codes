@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+int count = 0;
+
+void generate_subsequences(char* input, char* output, int i, int j)   //i --> input ptr, j --> output ptr
+{
+    //base case
+    if(input[i] == '\0')
+    {
+        output[j] = '\0';
+        cout << output << " ";
+        count++;            //why only output name???? doubt
+        return;
+    }
+    //rec case
+    //exclude the current character
+    generate_subsequences(input, output, i+1, j);
+
+    //include the current character
+    output[j] = input[i];
+    generate_subsequences(input, output, i+1, j+1);
+}
+int main() {
+    char input[10];
+    cin >> input;
+    char output[10];
+    generate_subsequences(input,output,0,0);
+    cout << endl <<count;
+}
