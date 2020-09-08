@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* left;
+        node* right;
+    //Constructor
+    node(int d){
+        data = d;
+        left = NULL;
+        right = NULL;
+    }   
+};
+node* buildTreeFromTraversals(int *inorder, int* pre, int s, int e){  //build tree from preorder and inorder traversal
+    static int i = 0;
+    //base case
+    if(s > e){
+        return NULL;
+    }
+    //recursive case
+    node* root = new node(pre[i]);
+    //search this node in the inorder traversal
+    int index = -1;
+    for(int j = s; j <= e; j++){
+        if(inorder[j] == pre[i]){
+            index = j;
+            break;
+        }
+    }
+    //increment 'i' to go to the next node in preorder traversal
+    i++;
+    //recursive calls
+    root->left = buildTreeFromTraversals(inorder,pre,s,index-1);
+    root->right = buildTreeFromTraversals(inorder,pre,index+1,e);
+    return root;
+}
+
+void bfs_with_endl(node* root){
+    queue<node*> q;
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()){
+        node* f = q.front();
+
+        //if null is encountered, change the line and push a null again
+        if(f == NULL){
+            cout << endl;
+            q.pop();
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+        else{
+            cout<<f->data<<" ";
+            q.pop();
+            //if left child exists
+            if(f->left){
+                q.push(f->left);
+            }
+            //if right child exists
+            if(f->right){
+                q.push(f->right);
+            }
+        }
+    }
+    return;
+}
+int main() {
+    int inorder[] = {3,2,8,4,1,6,7,5};
+    int pre[] = {1,2,3,4,8,5,6,7};
+    int n = sizeof(inorder)/sizeof(int);
+
+    node* root = buildTreeFromTraversals(inorder,pre,0,n-1);
+    bfs_with_endl(root);
+
+}
