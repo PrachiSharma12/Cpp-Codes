@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+  
+    /*
+        1
+        01
+        101
+        0101
+    */
+    // row number odd= starts with 1
+    // row number even= starts with 0
+    int n,val;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {   
+        if(i%2==0)
+        {
+            val=0;
+        }
+        else
+        {
+            val=1;
+        }
+        for(int j=1;j<=i;j++)
+        {
+            cout<<val<<" "<<endl;
+            val= !val;
+        }
+        cout<<endl;
+    }
+    
+}

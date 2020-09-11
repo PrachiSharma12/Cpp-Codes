@@ -1,0 +1,83 @@
+// NCR USING NCR AND FACT FUNC
+
+
+#include <iostream>
+using namespace std;
+
+
+int fact(int m)
+{
+    int k=1;
+    for(int i=1;i<=m;i++)
+    {
+        k=k*i;
+    }
+    return k;
+}
+
+int ncr(int N, int R)
+{
+    int a,b,c,NCR;
+    a=fact(N);
+    b=fact(R);
+    c=fact(N-R);
+    NCR= a/(b*c);
+    return NCR;
+
+
+} 
+
+int main() 
+{
+    int n,r;
+    cin>>n>>r;
+    int ans=ncr(n,r);
+    cout<<ans<<endl;
+       
+}
+
+
+
+// if we change postitions (define ncr before fact) of fact and ncr function...we need to declare the function fact first.
+
+
+
+
+#include <iostream>
+using namespace std;
+int fact(int);               //fact function declared
+
+
+
+int ncr(int N, int R)
+{
+    int a,b,c,NCR;
+    a=fact(N);
+    b=fact(R);
+    c=fact(N-R);
+    NCR= a/(b*c);
+    return NCR;
+
+
+} 
+
+
+
+int fact(int m)
+{
+    int k=1;
+    for(int i=1;i<=m;i++)
+    {
+        k=k*i;
+    }
+    return k;
+}
+
+
+int main() 
+{
+    int n,r;
+    cin>>n>>r;
+    int ans=ncr(n,r);
+    cout<<ans<<endl;
+}

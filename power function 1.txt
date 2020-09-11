@@ -1,0 +1,16 @@
+// power function-----  a*2^b
+
+
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a,b,k=1;
+    cin>>a>>b;
+    for(int i=1;i<=b;i++)
+    {
+        k=k*2;
+    }
+    cout<< a*k;
+}
