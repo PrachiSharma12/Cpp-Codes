@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int string_to_integer(string str,int p)
+{
+
+    //base case
+    if(str[0] == '\0'){
+        return 0;
+    }
+    //rec case
+    int ans = (str[0] - '0')*p + string_to_integer(str.substr(1), p/10) ;
+    return ans;
+}
+int main() {
+    string str;
+    cin >> str;
+    int p = 1;
+    for(int i = 1; i < str.length(); i++)
+    {
+        p = p*10;
+    }
+    cout << string_to_integer(str,p) <<endl ;
+}
