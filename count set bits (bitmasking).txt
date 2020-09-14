@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+void count_set_bits_approach_1 (int n)
+{
+    int ans = 0;
+    while(n > 0)
+    {
+        int last_bit = n & 1;
+        ans = ans + last_bit;
+        n = n >> 1;
+    }
+    cout<<ans<<endl;
+}
+void count_set_bits_approach_2(int n)
+{
+    int ans = 0;
+    while ( n > 0)
+    {
+        n = n & (n-1);
+        ans++;
+    }
+    cout<<ans<<endl;
+}
+int main() {
+    //count set bits approach 1
+    int n;
+    cin>>n;
+    count_set_bits_approach_1(n);
+    count_set_bits_approach_2(n);
+    cout<< __builtin_popcount(n) << endl; //built in function to count setbits
+    
+}
