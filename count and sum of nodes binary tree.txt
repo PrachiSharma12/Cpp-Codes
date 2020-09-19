@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* left;
+        node* right;
+    //Constructor
+    node(int d){
+        data = d;
+        left = NULL;
+        right = NULL;
+    }   
+};
+node* bulidTree(){
+    int d;
+    cin >> d;
+    //base case
+    if(d == -1){
+        return NULL;
+    }
+    //otherwise
+    node* root = new node(d);
+    root->left = bulidTree();  //left subtree
+    root->right = bulidTree(); //right subtree
+
+    return root;
+}
+int count_nodes(node* root){
+    if(root == NULL){
+        return 0;
+    }
+    return 1 + count_nodes(root->left) + count_nodes(root->right);
+}
+int sum_of_nodes(node* root){
+    if(root == NULL){
+        return 0;
+    }
+    return root->data + sum_of_nodes(root->left) + sum_of_nodes(root->right);
+}
+int main() {
+    node* root = bulidTree();
+    cout << count_nodes(root) <<endl;
+    cout << sum_of_nodes(root) <<endl;
+}
