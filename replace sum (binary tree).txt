@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* left;
+        node* right;
+    //Constructor
+    node(int d){
+        data = d;
+        left = NULL;
+        right = NULL;
+    }   
+};
+node* bulidTree(){
+    int d;
+    cin >> d;
+    //base case
+    if(d == -1){
+        return NULL;
+    }
+    //otherwise
+    node* root = new node(d);
+    root->left = bulidTree();  //left subtree
+    root->right = bulidTree(); //right subtree
+
+    return root;
+}
+void bfs_with_endl(node* root){
+    queue<node*> q;
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()){
+        node* f = q.front();
+
+        //if null is encountered, change the line and push a null again
+        if(f == NULL){
+            cout << endl;
+            q.pop();
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+        else{
+            cout<<f->data<<" ";
+            q.pop();
+            //if left child exists
+            if(f->left){
+                q.push(f->left);
+            }
+            //if right child exists
+            if(f->right){
+                q.push(f->right);
+            }
+        }
+    }
+    return;
+}
+int replaceSum(node* root){
+    if(root == NULL){
+        return 0;
+    }
+    if(root->left == NULL && root->right == NULL){
+        //It is a leaf node --> no change
+        return root->data;
+    }
+    //recursive part
+    int leftSum = replaceSum(root->left);
+    int rightSum = replaceSum(root->right);
+
+    int temp = root->data;
+    root->data = leftSum + rightSum;
+    return temp + root->data; 
+}
+
+int main() {
+    node* root = bulidTree();
+    bfs_with_endl(root);
+    replaceSum(root);
+    cout << endl;
+    bfs_with_endl(root);
+}
