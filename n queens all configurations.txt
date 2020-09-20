@@ -1,0 +1,100 @@
+#include <iostream>
+using namespace std;
+int count = 0;
+bool isSafe(int board[][10], int i, int j, int n)   //this function takes linear time O(N)
+{
+    //1. check for the cells above (col)
+    for(int row = 0; row < i; row++)
+    {
+        if(board[row][j] == 1){
+            return false;
+        }
+    }
+
+    //2. check for the left diagonal
+    int x = i;
+    int y = j;
+    while(x >= 0 && y >= 0)
+    {
+        if(board[x][y] == 1){
+            return false;
+        }
+        x--;
+        y--;
+    }
+
+    //3. check for the right diagonal
+    x = i;
+    y = j;
+    while(x >= 0 && y < n)
+    {
+        if(board[x][y] == 1){
+            return false;
+        }
+        x--;
+        y++;
+    }
+
+    //the position is now safe to place a queen
+    return true;
+}
+bool solveNqueens(int board[][10], int i, int n)
+{
+    //base case
+    //all the rows have been traversed and queens have been successfully placed in all the rows (0 to n-1)
+    if(i == n)
+    {
+        //print the configuration
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(board[i][j] == 1)
+                    cout << "Q" <<" ";
+                else
+                    cout << "_" <<" ";    
+            }
+            cout << endl;
+        }
+
+        cout << endl <<endl;
+        //  return true;       //N queens problem solved      --> to print a single config
+        //to print all configs
+        count++;
+        return false;
+    }
+
+    //recursive case
+    //self work --> Try to place the queen in the current row and call on the remaining part which will be soled by recursion
+    // iterate over all the columns and find the cell which is safe to place queen
+    for(int j = 0; j < n; j++)
+    {
+        //check if i,j position safe to place queen        (i --> current row)
+        if( isSafe(board,i,j,n) )
+        {
+            //place the queen --> Assuming i,j is the right position
+            board[i][j] = 1;
+            //call on the remaining rows
+            bool nextQueenRakhPaaye = solveNqueens(board,i+1,n);
+
+            if( nextQueenRakhPaaye ){
+                return true;
+            }
+
+            //Means i,j is not the right position -- Assumption is wrong
+            board[i][j] = 0; //bakctracking    -->     removed the queen from the previously assumed place
+        }
+    }
+    return false;    //failed to place the queen anywhere in the current row
+
+}
+int main() {
+    int n;
+    int board[10][10] = {0};
+    //array element = 1 means a queen is placed there
+    cin >> n;
+    solveNqueens(board , 0, n);          //0 --> row number (i)  and n --> no of rows
+    cout << endl <<endl;
+    cout << endl <<endl;
+    cout << count <<endl;
+}
