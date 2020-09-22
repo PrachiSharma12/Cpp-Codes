@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node* left;
+        node* right;
+    //Constructor
+    node(int d){
+        data = d;
+        left = NULL;
+        right = NULL;
+    }   
+};
+node* bulidTree(){
+    int d;
+    cin >> d;
+    //base case
+    if(d == -1){
+        return NULL;
+    }
+    //otherwise
+    node* root = new node(d);
+    root->left = bulidTree();  //left subtree
+    root->right = bulidTree(); //right subtree
+
+    return root;
+}
+
+int height(node* root){
+    if(root == NULL){
+        return 0;
+    }
+    int ls = height(root->left);
+    int rs = height(root->right);
+    return max(ls,rs)+1;
+}
+int diameter(node* root){
+    if(root == NULL){
+        return 0;
+    }
+    int h1 = height(root->left);
+    int h2 = height(root->right);
+    int option1 = h1+h2;
+    int option2 = diameter(root->left);
+    int option3 = diameter(root->right);
+
+    return max(option1,max(option2,option3));
+}
+class Pair{
+    public:
+        int height;
+        int diameter;
+};
+Pair diameter_optimised(node* root){
+    Pair p;
+    //base case
+    if(root == NULL){
+        p.height = p.diameter = 0;
+        return p;
+    }
+    //Otherwise, for left and right subtree
+    Pair left = diameter_optimised(root->left);
+    Pair right = diameter_optimised(root->right);
+
+    //Compute height and diameter at current node
+    p.height = max(left.height,right.height) + 1;
+    p.diameter = max(left.height + right.height , max(left.diameter,right.diameter));
+
+    return p;
+}
+
+int main() {
+    node* root = bulidTree();
+    cout << diameter(root) << endl;
+    Pair ans = diameter_optimised(root);
+    cout << ans.diameter << endl;
+
+    cout<< "Also, height of the tree is "<<ans.height <<endl;
+}

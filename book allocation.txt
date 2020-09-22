@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isPossible(int books[], int n, int m, int curr_min)
+{
+    int studentUsed = 1;
+    int pages_reading = 0;
+
+    for(int i = 0; i < n; i++)
+    {
+        if(pages_reading + books[i] > curr_min)
+        {
+            studentUsed++;
+
+            pages_reading = books[i];
+            if(studentUsed > m)
+                return false;
+        }
+        else
+            pages_reading += books[i];
+    }
+    return true;
+}
+
+int findPages(int books[], int n, int m)
+{
+    long long sum = 0;
+
+    if(n < m)
+        return -1;
+
+    //count total number of pagaes (sum of all pages)
+    for(int i = 0; i < n; i++)
+        sum += books[i];    
+
+    int start = books[n-1];  //min (a student will read atleast 1 book with max books[n-1] pages)
+    int end = sum;
+    int ans = INT_MAX;
+
+    while(start <= end)
+    {
+        int mid = (start + end) / 2;
+         if( isPossible(books,n,m,mid) )
+         {
+             ans = min(ans, mid);
+             end = mid - 1; 
+         }
+         else
+         {
+             //not possible to divide
+             //inc the no of pages
+             start = mid + 1;
+         } 
+    }
+    return ans;
+}
+int main() 
+{
+    int testcases;
+    cin>>testcases;
+    for(int t = 0; t < testcases; t++)
+    {
+        int n,m;
+        cin>>n>>m;
+        int books[10000];
+        for(int i = 0; i < n; i++)
+            cin>>books[i];
+        cout<<findPages(books,n,m)<<endl;    
+    }
+    return 0;
+}

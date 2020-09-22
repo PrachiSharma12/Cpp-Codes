@@ -1,0 +1,41 @@
+// sorted arrays
+
+#include <iostream>
+#include <limits.h>
+using namespace std;
+int main()
+{
+    int arr1[10]={1,2,6};
+    int arr2[10]={5,7};
+    int arr3[10]={8,10,11};
+    int n1=3, n2=2, n3=3;
+    int a=0,b=0,c=0,mindiff = INT_MAX;
+    int triplet1,triplet2,triplet3;
+    while(a<n1 && b<n2 && c<n3)
+    {
+        int x = max( max(arr1[a],arr2[b]), arr3[c] );
+        int y = min( min(arr1[a],arr2[b]), arr3[c] );
+        
+        int currentdiff = x-y;
+        if(currentdiff < mindiff)
+        {
+            mindiff = currentdiff;
+            triplet1=arr1[a];
+            triplet2=arr2[b];
+            triplet3=arr3[c];
+        }
+        if(mindiff == 0)
+        {
+            break;
+        }
+        if(arr1[a] == y)
+            a++;
+        else if(arr2[b] == y)
+            b++;
+        else
+            c++;
+    }
+    cout<<mindiff<<endl;
+    cout<<triplet1<<", "<<triplet2<<", "<<triplet3<<endl;
+    
+}
