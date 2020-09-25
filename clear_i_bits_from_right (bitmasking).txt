@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+int main() {
+    //clear range of bits (clear i bits from right)
+    // -1  =  all 32 bits = 1s
+
+    int n,i;
+    cin>>n>>i;
+    int mask = (-1 << i);
+    int ans = n & mask;
+    cout<<ans<<endl;
+}

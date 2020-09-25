@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+//clear a range of bits from i to j
+
+int clear_bits_i_to_j(int N, int i, int j)
+{
+    int ones = (~0);
+    int mask1 = ones << (j+1);
+    int mask2 = (1 << i) - 1;
+    int mask = mask1 | mask2;
+    int ans = N & mask;
+    return ans;  
+}
+int main() {
+
+    int N,i,j;
+    cin>>N>>i>>j;
+    int ans = clear_bits_i_to_j(N,i,j);
+    cout<<ans<<endl;
+    return 0;
+}    
+
