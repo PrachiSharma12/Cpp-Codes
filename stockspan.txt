@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int ans[100];
+
+void stockSpan(int* prices, int days)
+{
+    stack<int> st;
+    for(int i=0; i<days; i++)
+    {
+        int currentDayPrice = prices[i];
+        while(!st.empty() && prices[st.top()] <= currentDayPrice)
+        {
+            st.pop();   // kyuki aage kisike liye bhi wo kabhi answer nahi hoga kyuki usse bada din uske baad exist karta hi hai
+        }
+        int greaterValDay = st.empty()? i : st.top();
+        ans[i] = i - greaterValDay;
+        st.push(i);
+    }
+    return;
+
+
+}
+int main() {
+    int prices[100],days;
+    cin>>days;
+    for(int i=0; i<days; i++)
+        cin>>prices[i];
+    //for(int i=0; i<n; i++)
+    //    days.push(i);
+    stockSpan(prices,days); 
+    for(int i=0; i<days; i++)
+        cout<<ans[i]<<" ";
+    cout<<"END";           
+}
