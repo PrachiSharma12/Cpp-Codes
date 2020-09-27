@@ -1,0 +1,63 @@
+//Car sorting (on the basis of distance from origin) problem using vectors 
+
+#include <iostream>
+#include <vector>
+#include <algorithm> //for sort function
+#include <cstring>
+using namespace std;
+
+class Car{
+    public:
+        string car_name;
+        int x,y;
+        Car(){
+
+        }
+        //Parameterised constructor
+        Car(string n, int x, int y){
+            car_name = n;
+            this -> x = x;
+            this -> y = y;
+        }
+
+        //function to calculate square of distance from origin
+        int dist(){
+            return x*x + y*y;
+        }
+};
+
+bool compare(Car A, Car B)
+{
+    //square of distance
+    int da = A.dist();
+    int db = B.dist();
+
+    //if two cars are at same distance, sort according to length of the name
+    if(da == db){
+        return A.car_name.length() < B.car_name.length();
+    }
+    return da < db;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<Car> v;
+
+    for(int i = 0; i < n; i++){
+        string name;
+        int x,y;
+        cin>>name>>x>>y;
+        Car temp(name,x,y);
+        v.push_back(temp);
+    }
+    //sort using comparator
+    sort(v.begin(), v.end(), compare);
+
+    //print the sorted cars
+    //for each loop.....for every element p in vector v
+    for(auto c:v){
+        cout<<"Car "<<c.car_name<<" Distance = "<<c.dist()<<" Location "<<c.x<<","<<c.y<<endl;
+    }
+    return 0;
+}
