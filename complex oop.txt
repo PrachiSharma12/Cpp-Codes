@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+class Complex
+{
+public:
+    int arr[2];
+
+    void print()
+    {
+        cout<<arr[0]<<" + "<<arr[1]<<"i"<<endl;
+    }
+};
+int main() {
+    Complex A;
+    A.arr[0]=5;
+    A.arr[1]=7;
+    A.print();
+}    
