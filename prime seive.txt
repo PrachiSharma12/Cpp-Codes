@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+void seive(int p[1000000], int n)
+{
+    p[0]=0,p[1]=0,p[2]=1;
+    for(int i=3 ; i<=n; i=i+2)  //constructing prime seive leaving even numbers (array)
+    {
+        p[i]=1;
+    }
+
+    for(int i=3 ; i<=n; i=i+2)
+    {
+        if(p[i]==1)
+        {
+            for(int j=i*i; j<=n; j=j+2*i)
+                p[j]=0;
+        }
+        return;
+    }
+}
+int main() 
+{
+    int t,a,b;
+    long long int n=1000000;
+    long long int p[n];
+    seive(p,n);
+
+}
