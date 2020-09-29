@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool allPositive(int* arr)
+{
+    int flag=1;
+    for(int i=0; i<n; i++)
+    {
+        if(arr[i]<0)
+        {
+            flag=0;
+        }
+    }
+    return flag;
+}
+int countOfZero(int* arr)
+{
+    count=0;
+    for(int i=0; i<n; i++)
+    {
+        if(arr[i]==0)
+            count++;
+    }
+    return count;
+}
+int  main()
+{
+    int arr[100],n,ans;
+    cin>>n;
+    int product=1;
+    for(int i=0; i<n ;i++)
+    {
+        cin>>arr[i];
+        product = product * arr[i];
+    }
+    if(allPositive)
+    {
+        if(countOfZero(arr) == 0)
+        {
+            //min number
+        }
+        else
+        {
+            ans=0;
+        }        
+    }
+    else
+    {
+        
+
+
+
+
+    }
+
+
+
+    
+
+
+}
