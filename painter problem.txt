@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+isPossible(int time[], int n, int k, int mid)
+{
+    //how many painters needed to paint the board in "mid" time?
+    //let it be x
+
+
+    if(x <= k)
+        return true;
+    else
+        return false;    
+
+}
+
+min_time(int time[], int n, int k)
+{
+    //max time required
+    int sum = 0;
+    for(int i = 0; i < n; i++)
+        sum += time[i];
+
+    int start = time[n-1]; //min time required
+    int end = sum; //max time required
+    int ans = INT_MAX;
+
+    while(start <= end)
+    {
+        int mid = (start + end)/2;
+        
+        if( isPossible(time,n,k,mid) )
+        {
+            ans = min(ans,mid);
+            end = mid - 1;
+        }
+        else
+            start = mid + 1;
+    }
+    return ans;    
+}
+
+int main()
+{
+    int n,k,t;
+    int boards[100000];
+    cin>>n>>k>>t;
+    for(int i = 0; i < n; i++)
+        cin>>boards[i];
+    int time[100000];
+    for(int i = 0; i < n; i++)  
+        time[i] = boards*t;
+
+    cout<< min_time(time,n,k) <<endl;      
+}
