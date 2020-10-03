@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+ int main()
+ {
+	 int testcase;
+	 cin>>testcase;
+	 for(int t = 0; t < testcase; t++)
+	 {
+		      int n,arr[1000],csum[1000] = {0};
+     cin>>n;
+     for(int i=0; i<n; i++)
+     {
+         cin>>arr[i];     
+     }
+
+     // creating cumulative sum array
+     csum[0]=arr[0];
+     
+     
+     for(int i=1; i<n; i++)
+     {
+         csum[i] = csum[i-1] + arr[i];
+         
+     }
+    
+     //finding maximum sum array
+     int maxSum = 0,currentSum = 0, i, j,left = -1, right = -1;
+     for(i=0; i<n; i++)
+     {
+         for(j=i; j<n; j++)
+         {
+             currentSum = 0; //imp step
+             currentSum = csum[j] - csum[i-1];
+    
+         if(currentSum > maxSum)
+            {
+                maxSum = currentSum;
+                left = i;
+                right = j;
+            }
+         }
+     } 
+
+     cout<<maxSum<<endl;
+
+	 }
+ }
