@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+bool rat_chases_its_cheese(char maze[20][20], int soln[][20], int i, int j, int n, int m)
+{
+    if(i == n && j == m)
+    {
+        soln[n][m] = 1;
+        //print the soltuion
+        for(int i = 0; i <= n; i++)
+        {
+            for(int j = 0; j <= m; j++)
+            {
+                cout << soln[i][j] <<" ";
+            }
+            cout << endl;
+        }
+        cout << endl <<endl ;
+        return true;
+    }
+
+    //Rat should be inside the grid
+    if(i>n || j>m || i<0 || j<0){
+        return false;
+    }
+        
+    //if the cell is blocked
+    if(maze[i][j] == 'X'){
+        return false;
+    }
+        
+    //Assume that solutions exists through the current cell
+    soln[i][j] = 1;
+
+    //recursive case
+    bool right,down,up,left;
+    soln[i][j] = 1;
+    
+    if(soln[i+1][j]==0){
+        down = rat_chases_its_cheese(maze,soln,i+1,j,n,m);
+    }
+    //Modiificatons:
+    if(soln[i][j+1]==0 && !down){
+        right = rat_chases_its_cheese(maze,soln,i,j+1,n,m);
+    }
+    if(soln[i-1][j]==0 && !down && !right){
+        up = rat_chases_its_cheese(maze,soln,i-1,j,n,m);
+    }
+    if(soln[i][j-1]==0 && !down && !right && !up){
+        left = rat_chases_its_cheese(maze,soln,i,j-1,n,m);
+    }
+
+    if(right||down||left||up){
+        return true;
+    }
+
+    //backtracking
+    soln[i][j] = 0;
+
+    return false;            
+}
+int main() {
+    char maze[20][20] ;
+    int m,n;
+    cin >> n >> m;
+    for(int i = 0; i < n ; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            cin >> maze[i][j];
+        }
+    }                        
+    int soln[20][20] = {0}; 
+    bool ans = rat_chases_its_cheese(maze,soln,0,0,n-1,m-1);
+    if( !ans )
+    {
+        cout <<"NO PATH FOUND";
+    }                   
+}
