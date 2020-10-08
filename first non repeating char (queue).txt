@@ -1,0 +1,35 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+int main() {
+    queue<char> q;
+    int freq[26] = {0}; //frequency array
+
+    char ch;
+    cin >> ch;
+    //running stream until '.'
+    while(ch != '.'){
+        //1. insert the element and update the frequency array
+        q.push(ch);
+        freq[ch - 'a'] ++;   // if character is a....a-a = 0. b-a = 1, c-a =2 and so on
+        
+        //2. query
+        while(!q.empty()){
+            int element = q.front();
+            if(freq[element - 'a'] > 1){
+                q.pop();
+            }
+            else{ //frequency is 1... so it is first non repeating character
+                cout << q.front() << endl;
+                break;     //IMPORTANT
+            }            
+        }
+
+        //if q is empty
+        if(q.empty()){
+            cout << "-1" << endl;
+        }
+        
+        cin >> ch;
+    }
+}
