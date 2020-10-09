@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+int func(int a, int b)
+{
+    if(b == 0)
+        return 0;
+    int ans = a + func(a,b-1);
+    return ans;    
+}
+int main() {
+    //multiply 2 nos without using * operator
+    //func(a,b) --> a*b  ( return a+a+a+.....b times)
+    int a,b;
+    cin >> a >> b;
+    cout << func(a,b) << endl;
+}
