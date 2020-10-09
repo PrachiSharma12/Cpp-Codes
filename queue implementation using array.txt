@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+class Queue {
+    int *arr;
+    int front, rear, current_size, max_size;
+
+public:
+    //constructor
+    Queue(int default_size = 5){   //if user gives size 'x', size will become x...otherwise default size will be 5
+        
+        arr = new int[default_size];  //dynamic array of size equal to queue size given 
+        current_size = 0; // queue is empty initially
+        max_size = default_size; 
+        front = 0;
+        rear = max_size - 1;
+    }   
+    bool full(){
+        return current_size == max_size;
+    } 
+    bool empty(){
+        return current_size == 0;
+    }
+    void push(int data){
+        if(!full()){
+            rear = (rear+1) % max_size;
+            arr[rear] = data;
+            current_size++;
+        }
+    }
+    void pop(){
+        if(!empty()){
+            front = (front+1) % max_size;
+            current_size--;
+        }
+    }
+    int front_element(){
+        return arr[front];
+    }
+
+    //Destructor
+    ~Queue(){
+        if(arr != NULL){
+            delete [] arr;
+            arr = NULL;
+        }
+    }
+};
+
+int main() {
+    Queue q;  //size not mentioned, so default size will be 5
+    for(int i = 1; i <= 6; i++){
+        q.push(i);        
+    }
+    // as size was 5...only 5 elements will be inserted (1,2,3,4,5) and 6 will not be inserted
+    q.pop();  // 1 is popped
+    q.pop();  // 2 is popped
+
+    q.push(7);  // 7 is pushed
+    while(!q.empty()){
+        cout << q.front_element() << " ";
+        q.pop();
+    }
+    
+}
