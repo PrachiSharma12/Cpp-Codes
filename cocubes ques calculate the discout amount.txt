@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+class item{
+    public:
+     int qty;
+     float price;
+     float discount;
+    
+    //contructor
+     item(int q, float p, float d){
+         this->qty = q;
+         this->price = p;
+         this->discount = d;
+     }
+
+};
+int main() {
+    int m,q;
+    float p,d;
+    item* arr = (item*)malloc(sizeof(item) * m);
+    cin >> m;
+    for(int i = 0; i < m; i++){
+        cin >> q >> p >> d;
+        arr[i] = item(q,p,d);
+    }
+    float ans = 0;
+    for(int i = 0; i < m; i++){
+        float x =(arr[i].qty * arr[i].price * arr[i].discount/100);
+        ans += x;
+    }       
+    cout << endl;
+    cout << ans;
+
+}
