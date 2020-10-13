@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+void bubble_sort(int* arr, int n)
+{
+    //base case
+    if(n == 1)
+        return;  //one single element is always sorted
+    //rec case
+    for(int j = 0; j < n-1; j++)       //inner loop
+    {
+        if(arr[j] > arr[j+1])
+            swap(arr[j] , arr[j+1]);
+    }
+    bubble_sort(arr, n-1);    
+}
+
+void bubble_sort_recursive(int* arr, int j, int n)
+{
+    //base cases
+    if(n == 1)
+        return;
+    if(j == n-1)
+    {	
+	//single pass of current array has been done
+	return bubble_sort_recursive(arr,0,n-1);
+    }
+
+    //rec case
+    if(arr[j] > arr[j+1])
+        swap(arr[j] , arr[j+1]);
+
+     bubble_sort_recursive(arr,j+1,n);
+     return;           
+}
+int main() {
+    int arr[100],n;
+    cin >> n;
+    for(int i = 0; i < n; i++)
+        cin >> arr[i];
+    bubble_sort_recursive(arr,0,n); 
+    for(int i = 0; i < n; i++)
+        cout << arr[i] << " ";       
+}    
+
