@@ -1,0 +1,44 @@
+#include <iostream>
+#include <unordered_map>  //random order
+#include <vector>
+using namespace std;
+int main() {
+    //One person can have multiple phone numbers
+    //Key - string (name) 
+    //Value - vector of strings (phonenumbers)
+    unordered_map<string, vector<string> > phonebook;
+
+    phonebook["rahul"].push_back("9110");
+    phonebook["rahul"].push_back("9112");
+    phonebook["rahul"].push_back("9113");
+    phonebook["rahul"].push_back("9114");
+    phonebook["kajal"].push_back("8112");
+    phonebook["kajal"].push_back("8113");
+    phonebook["kajal"].push_back("8114");
+
+    //Iterate
+    for(auto p:phonebook){   //p is pair of key(string) and value(vector)
+        cout << "Name: " <<p.first <<" --> ";
+
+        //now iterate the vector to get all the phone numbers of the person  p
+        for(auto s:p.second){
+            cout << s <<", ";
+        }
+        cout << endl;
+    }
+
+    //Search
+    string name;
+    cin >> name;
+
+    if(phonebook.count(name) == 0){
+        //name not present in the phonebook
+        cout << "Not found" <<endl;
+    }
+    else{
+        //Iterate the vector of that name
+        for(auto s:phonebook[name]){
+            cout << s <<", ";
+        }
+    }
+}
