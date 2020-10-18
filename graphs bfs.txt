@@ -1,0 +1,54 @@
+#include <iostream>
+#include <queue>
+#include <map>
+#include <list>
+using namespace std;
+
+template<typename T>
+class Graph{
+    //Adj list
+    map<T, list<T> > l;
+public:
+    void addEgde(int x, int y){
+        //Assuming bidirectional and unweighted
+        l[x].push_back(y);
+        l[y].push_back(x);
+    }
+
+    void bfs(T src){
+        map<T ,bool> visited; 
+        queue<T> q;
+
+        //1. Push the source node in the queue and mark it as visited
+        q.push(src);
+        visited[src] = true;
+        while(!q.empty()){
+            T node = q.front();
+            //2.pop that node and print
+            q.pop();   //fifo
+            cout << node <<" ";  //porder will depend on insertion of adjacency list
+            
+            //3.push the unvisited neighbours of this node in the queue
+            for(int nbr : l[node]){
+                if(visited[nbr] == false){
+                    q.push(nbr);
+                    //and mark this nbr as visited
+                    visited[nbr] = true;
+                }
+            }
+        }
+    }
+};
+int main() {
+    Graph<int> g;
+
+    //these insertions will decide the order of output
+    g.addEgde(0,1);
+    g.addEgde(1,2);
+    g.addEgde(2,3);
+    g.addEgde(3,4);
+    g.addEgde(4,5);
+
+    g.bfs(0);
+    return 0;
+}
