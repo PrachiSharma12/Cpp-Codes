@@ -1,0 +1,55 @@
+#include <iostream>
+#include <queue>
+#include <map>
+#include <climits>
+#include <list>
+using namespace std;
+
+template<typename T>
+class Graph{
+    //Adj list
+    map<T, list<T> > l;
+public:
+    void addEgde(int x, int y){
+        //Assuming bidirectional and unweighted
+        l[x].push_back(y);
+        l[y].push_back(x);
+    }
+
+    void dfs_helper(T src, map<T,bool> &visited){
+        //dfs helper is a recursive function that will traverse the graph
+        cout << src << " ";
+        visited[src] = true;
+        //go to all the unvisited nbrs of the node
+        for(T nbr: l[src]){
+            if(!visited[nbr]){
+                dfs_helper(nbr,visited);
+            }
+        }
+    }
+
+    void dfs(T src){
+        map<T,bool> visited;
+        //Initially, all nodes will be unvisited
+        for(auto p:l){
+            T node = p.first;
+            visited[node] = false;
+        }
+        dfs_helper(src,visited);
+    }
+};    
+
+int main() {
+    Graph<int> g;
+
+    //these insertions will decide the order of output
+    g.addEgde(0,1);
+    g.addEgde(1,2);
+    g.addEgde(2,3);
+    g.addEgde(3,4);
+    g.addEgde(4,5);
+    g.addEgde(0,3);
+
+    g.dfs(0);
+    return 0;
+}
