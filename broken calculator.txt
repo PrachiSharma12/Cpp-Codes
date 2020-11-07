@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int multiply(int number, int resultArray[], int resultArraySize){
+    int carry = 0, mulres;
+
+    /*
+    *   Calculating the result array by multiplying the
+    *   existing array with new number
+    */
+    for(int i = 0; i < resultArraySize; i++){
+        mulres = number*resultArray[i] + carry;
+        resultArray[i] = mulres % 10;
+        carry = mulres / 10;
+    }
+
+    while(carry){
+        resultArray[resultArraySize++] = carry % 10;
+        carry = carry/10;
+    }
+    return resultArraySize;
+}
+
+void extra_long_factorial(int n){
+    int resultArray[100000], resultArraySize = 1;
+    resultArray[0] = 1;
+
+    /*
+    *   For each number in the factorial multiplication,
+    *   multiply it with the result array and update
+    *   the result array size variable
+    */
+    while(n){
+        resultArraySize = multiply(n--, resultArray, resultArraySize);
+    }
+
+    // * Displaying the result array in reverse order
+    for(int i=resultArraySize-1; i>=0; i--) {
+        cout<<resultArray[i];
+    }
+}
+int main() {
+    int n;
+    cin >> n;
+    extra_long_factorial(n);
+}
